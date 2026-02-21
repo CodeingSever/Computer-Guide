@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>เข้าสู่ระบบ - คู่มือความรู้คอมพิวเตอร์</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="login-page">
+  <div class="login-bg"></div>
+
+  <nav class="top-nav">
+    <div class="container nav-inner">
+      <a href="index.html" class="logo">Computer Guide</a>
+      <ul class="nav-links">
+        <li><a href="index.html">หน้าแรก</a></li>
+        <li><a href="index.html#webdev">เขียนเว็บไซต์</a></li>
+        <li><a href="login.html" class="nav-active">เข้าสู่ระบบ</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main class="login-main">
+    <div class="login-wrapper">
+      <div class="login-card">
+        <div class="login-header">
+          <h1>เข้าสู่ระบบ</h1>
+          <p>กรอกอีเมลและรหัสผ่านเพื่อเข้าสู่ระบบ</p>
+        </div>
+
+        <form class="login-form" id="loginForm" novalidate>
+          <div class="form-group">
+            <label for="email">อีเมล หรือชื่อผู้ใช้</label>
+            <input
+              type="text"
+              id="email"
+              name="email"
+              placeholder="example@email.com"
+              autocomplete="username"
+              required
+            />
+            <span class="form-error" id="emailError" aria-live="polite"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="password">รหัสผ่าน</label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              placeholder="••••••••"
+              autocomplete="current-password"
+              required
+            />
+            <span class="form-error" id="passwordError" aria-live="polite"></span>
+          </div>
+
+          <div class="form-options">
+            <label class="checkbox-wrap">
+              <input type="checkbox" name="remember" />
+              <span>จดจำการเข้าสู่ระบบ</span>
+            </label>
+            <a href="#" class="forgot-link">ลืมรหัสผ่าน?</a>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-block" id="submitBtn">
+            เข้าสู่ระบบ
+          </button>
+        </form>
+
+        <p class="login-footer">
+          ยังไม่มีบัญชี? <a href="register.html">สมัครสมาชิก</a>
+        </p>
+      </div>
+
+      <p class="back-home">
+        <a href="index.html">← กลับไปหน้าแรก</a>
+      </p>
+    </div>
+  </main>
+
+  <script src="script.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      var form = document.getElementById("loginForm");
+      var emailInput = document.getElementById("email");
+      var passwordInput = document.getElementById("password");
+      var emailError = document.getElementById("emailError");
+      var passwordError = document.getElementById("passwordError");
+      var submitBtn = document.getElementById("submitBtn");
+
+      function showError(el, msg) {
+        el.textContent = msg;
+        el.style.display = msg ? "block" : "none";
+      }
+
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+        showError(emailError, "");
+        showError(passwordError, "");
+
+        var email = emailInput.value.trim();
+        var password = passwordInput.value;
+
+        var hasError = false;
+        if (!email) {
+          showError(emailError, "กรุณากรอกอีเมลหรือชื่อผู้ใช้");
+          hasError = true;
+        }
+        if (!password) {
+          showError(passwordError, "กรุณากรอกรหัสผ่าน");
+          hasError = true;
+        }
+        if (hasError) return;
+
+        submitBtn.disabled = true;
+        submitBtn.textContent = "กำลังเข้าสู่ระบบ...";
+
+        setTimeout(function () {
+          alert("ตอนนี้เป็นแบบฟอร์มตัวอย่าง ยังไม่ได้เชื่อมกับระบบหลังบ้าน");
+          submitBtn.disabled = false;
+          submitBtn.textContent = "เข้าสู่ระบบ";
+        }, 800);
+      });
+    });
+  </script>
+</body>
+</html>
